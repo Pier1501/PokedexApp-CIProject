@@ -11,5 +11,6 @@ jobs:
           python-version: '3.12' 
       - run: python --version
       - run: uname -a
+      - run: ls -la
       - run: pip install -U pytest
       - run: pytest

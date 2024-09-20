@@ -39,3 +39,12 @@ def test_function_output_with_snapshot(snapshot):
     snapshot.assert_match(str_sasa, "foo_output.txt")
 
 
+frutti = '''frutti, prezzo, colore, sapore
+pera, 100, rossa, buona
+mela, 50, blu, squisita
+starfruit, 911, blallo, cringe
+'''
+
+def test_frutti_with_snapshot(snapshot):
+    snapshot.snapshot_dir = 'snapshots'
+    snapshot.assert_match(frutti, "frutti.csv")

@@ -34,7 +34,7 @@ def check_validate(instance, schema):
 
 def test_function_output_with_snapshot(snapshot):
     snapshot.snapshot_dir = 'snapshots'
-    sasa = func(6)
+    sasa = func(5)
     str_sasa = str(sasa)
     snapshot.assert_match(str_sasa, "foo_output.txt")
 

@@ -31,3 +31,10 @@ def check_validate(instance, schema):
     except:
         return False
 
+
+def test_function_output_with_snapshot(snapshot):
+    snapshot.snapshot_dir = 'snapshots'
+    sasa = func(5)
+    str_sasa = str(sasa)
+    snapshot.assert_match(str_sasa, "kungfu_output.txt")
+

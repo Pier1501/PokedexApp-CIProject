@@ -11,7 +11,6 @@ schema = {
 def func(x):
     return x + 2
 
-
 def test_answer():
     assert func(3) == 5
 
@@ -20,7 +19,6 @@ def test_validation_jsonschema_false():
 
 def test_validation_jsonschema():
     assert check_validate(instance={"name" : "Eggs", "price" : 34.99}, schema=schema) == True
-
 
 
 def check_validate(instance, schema):

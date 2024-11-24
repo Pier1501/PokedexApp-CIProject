@@ -1,10 +1,26 @@
-import requests
+import requests as rq
 import json
 
+url_pokeapi = "https://pokeapi.co/api/v2/pokemon/"
+
 def get_pokemon_data(pokemon_name):
-    url = f"https://pokeapi.co/api/v2/pokemon/{pokemon_name.lower()}"
-    response = requests.get(url)
-    return response.json() if response.status_code == 200 else None
+    url = url_pokeapi + f"{pokemon_name.lower()}"
+    try:
+        response = rq.get(url)
+        if response.status_code == 200:
+            pokemon_data = response.json()
+            pokemon_info = {
+                    "name": pokemon_data["name"].capitalize(),
+                    "id": pokemon_data["id"],
+                    "height": pokemon_data["height"] / 10,
+                    "weight": pokemon_data["weight"] / 10,
+                    "types": [t["type"]["name"] for t in pokemon_data["types"]],
+                    "abilities": [ability["ability"]["name"] for ability in pokemon_data["abilities"]]
+                }
+        return pokemon_info
+    
+    except rq.exceptions.RequestException as e:
+        return f"Error: {str(e)}"
 
 def get_pokemon_types(pokemon_data):
     return [type_info["type"]["name"].lower() for type_info in pokemon_data["types"]]

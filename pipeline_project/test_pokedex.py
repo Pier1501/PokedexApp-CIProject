@@ -61,8 +61,7 @@ def test_pikachu_not_ground():
 
 # Testing pokemon weaknesses table
 def test_charizard_effectiveness():
-    with open("types.json", "r") as f:
-        type_chart = json.load(f)
+    type_chart = json.load("types.json")
    
     effectiveness = calculate_type_effectiveness(["fire", "flying"], type_chart)
     assert effectiveness["water"] == 2.0, "Charizard should be weak to water"
@@ -71,8 +70,7 @@ def test_charizard_effectiveness():
 
 
 def test_scizor_effectiveness():
-    with open("types.json", "r") as f:
-        type_chart = json.load(f)
+    type_chart = json.load("types.json")
    
     effectiveness = calculate_type_effectiveness(["bug", "iron"], type_chart)
     assert effectiveness["fire"] == 4.0, "Scizor should be very weak to fire"
@@ -156,3 +154,73 @@ def test_scizor_effectiveness():
     }
   }
 }
+
+# Snapshot testing
+
+def test_pokemon_data_with_snapshot(snapshot_1):
+    pokemon_list = ['charizard', 'bulbasaur', 'pikachu']
+   
+    results = {}
+    for pokemon in pokemon_list:
+        results[pokemon] = get_pokemon_data(pokemon)
+
+    snapshot_1.assert_match(results)
+
+
+def test_effectiveness_table_with_snapshot(snapshot_2):
+    test_cases = [
+        {
+            "pokemon": "Charizard",
+            "types": ["fire", "flying"]
+        },
+        {
+            "pokemon": "Bulbasaur",
+            "types": ["grass", "poison"]
+        },
+        {
+            "pokemon": "Gengar",
+            "types": ["ghost", "poison"]
+        },
+        {
+            "pokemon": "Tyranitar",
+            "types": ["rock", "dark"]
+        }
+    ]
+
+    type_chart = json.load("types.json")
+   
+    results = {}
+    for case in test_cases:
+        effectiveness = calculate_type_effectiveness(case["types"], type_chart)
+       
+        # Format results in a readable way
+        categorized = {
+            "pokemon": case["pokemon"],
+            "types": case["types"],
+            "effectiveness": {
+                "immune": [],
+                "quarter": [],
+                "half": [],
+                "neutral": [],
+                "double": [],
+                "quadruple": []
+            }
+        }
+       
+        for type_name, multiplier in effectiveness.items():
+            if multiplier == 0:
+                categorized["effectiveness"]["immune"].append(type_name)
+            elif multiplier == 0.25:
+                categorized["effectiveness"]["quarter"].append(type_name)
+            elif multiplier == 0.5:
+                categorized["effectiveness"]["half"].append(type_name)
+            elif multiplier == 1:
+                categorized["effectiveness"]["neutral"].append(type_name)
+            elif multiplier == 2:
+                categorized["effectiveness"]["double"].append(type_name)
+            elif multiplier == 4:
+                categorized["effectiveness"]["quadruple"].append(type_name)
+       
+        results[case["pokemon"]] = categorized
+   
+    snapshot.assert_match(results)

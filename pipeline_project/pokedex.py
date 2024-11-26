@@ -78,8 +78,7 @@ def print_effectiveness_table(pokemon_name, effectiveness):
 
 def main():
     try:
-        with open("types.json", "r") as f:
-            type_chart = json.load(f)
+        type_chart = json.load("types.json")
     except FileNotFoundError:
         print("Error: types.json not found in current directory")
         return

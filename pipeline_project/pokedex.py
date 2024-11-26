@@ -44,7 +44,7 @@ def print_effectiveness_table(pokemon_name, effectiveness):
     print(f"\nDefensive Type Chart for {pokemon_name}:")
     print("-" * 40)
 
-    immune = []<
+    immune = []
     quarter = []
     half = []
     neutral = []

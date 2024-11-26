@@ -45,7 +45,7 @@ def test_tyranitar_types():
     tyranitar_data = {
         "types": ["rock", "dark"] 
     }
-    assert get_pokemon_types(gyarados_data) == ["rock", "dark"]
+    assert get_pokemon_types(tyranitar_data) == ["rock", "dark"]
     
 def test_torchic_not_water():
     torchic_data = get_pokemon_data('torchic')

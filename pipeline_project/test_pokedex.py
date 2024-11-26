@@ -86,7 +86,7 @@ def test_scizor_effectiveness():
   "title": "Pokemon Type Chart Schema",
   "description": "Schema for validating Pokemon type effectiveness relationships",
   "type": "object",
-  "additionalProperties": false,
+  "additionalProperties": False,
   "required": [
     "normal", "fire", "water", "electric", "grass", "ice",
     "fighting", "poison", "ground", "flying", "psychic",
@@ -122,7 +122,7 @@ def test_scizor_effectiveness():
   "$defs": {
     "typeEffectiveness": {
       "type": "object",
-      "additionalProperties": false,
+      "additionalProperties": False,
       "required": [
         "normal", "fire", "water", "electric", "grass", "ice",
         "fighting", "poison", "ground", "flying", "psychic",

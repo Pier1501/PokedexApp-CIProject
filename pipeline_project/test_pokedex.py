@@ -59,13 +59,11 @@ def test_gyarados_types():
 
 def test_torchic_not_water():
     torchic_data = get_pokemon_data('Torchic')
-    test_types = get_pokemon_types(torchic_data)
-    assert "water" not in test_types
+    assert "water" not in get_pokemon_types(torchic_data), f"Expected Torchic to not be Water type, but got {test_types}"
 
 def test_pikachu_not_ground():
     pikachu_data = get_pokemon_data('Pikachu')
-    test_types = get_pokemon_types(pikachu_data)
-    assert "ground" not in test_types
+    assert "ground" not in get_pokemon_types(pikachu_data), f"Expected Pikachu to not be Ground type, but got {test_types}"
 
 
 

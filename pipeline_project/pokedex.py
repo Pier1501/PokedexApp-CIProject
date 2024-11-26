@@ -74,7 +74,7 @@ def print_effectiveness_table(pokemon_name, effectiveness):
 
 def main():
     try:
-        with open("types.json", "r") as f:
+        with open("/workspaces/2023-25.BD.UFS14/pipeline_project/types.json", "r") as f:
             type_chart = json.load(f)
     except FileNotFoundError:
         print("Error: types.json not found in current directory")
@@ -95,7 +95,7 @@ def main():
         print_effectiveness_table(pokemon_name.capitalize(), effectiveness)
         
     except Exception as e:
-        print(f"An error occurred: {str(e)}")
+        print(f"An error occurred in the main: {str(e)}")
 
 if __name__ == "__main__":
     main()

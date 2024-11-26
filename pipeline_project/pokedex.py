@@ -4,7 +4,7 @@ import json
 url_pokeapi = "https://pokeapi.co/api/v2/pokemon/"
 
 def get_pokemon_data(pokemon_name):
-    url = url_pokeapi + f"{pokemon_name.lower()}"
+    url = url_pokeapi + pokemon_name.lower()
     try:
         response = rq.get(url)
         response.raise_for_status() 

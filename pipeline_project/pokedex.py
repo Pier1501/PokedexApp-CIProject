@@ -7,9 +7,9 @@ def get_pokemon_data(pokemon_name):
     url = url_pokeapi + f"{pokemon_name.lower()}"
     try:
         response = rq.get(url)
-        if response.status_code == 200:
-            pokemon_data = response.json()
-            pokemon_info = {
+        response.raise_for_status() 
+        pokemon_data = response.json()
+        pokemon_info = {
                     "name": pokemon_data["name"].capitalize(),
                     "id": pokemon_data["id"],
                     "height": pokemon_data["height"] / 10,
@@ -23,15 +23,6 @@ def get_pokemon_data(pokemon_name):
         return f"Error: {str(e)}"
 
 def get_pokemon_types(pokemon_data):
-    if pokemon_data is None:
-        raise TypeError("Pokemon data cannot be None")
-    
-    if isinstance(pokemon_data, str):
-        raise TypeError("Pokemon data must be a dictionary, not a string")
-    
-    if 'types' not in pokemon_data:
-        raise KeyError("Pokemon data must contain a 'types' key")
-    
     return [type_info["type"]["name"].lower() for type_info in pokemon_data["types"]]
 
 def calculate_type_effectiveness(pokemon_types, type_chart):

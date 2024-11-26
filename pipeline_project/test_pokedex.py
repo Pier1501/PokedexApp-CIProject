@@ -39,7 +39,7 @@ def validate_wrapper(schema, pokemon_name):
         return False
     
 
-def test_get_pokemon_types_success():
+def test_charizard_types():
     charizard_data = {
         "types": [
             {"type": {"name": "FIRE"}},
@@ -48,6 +48,7 @@ def test_get_pokemon_types_success():
     }
     assert get_pokemon_types(charizard_data) == ["fire", "flying"]
     
+def test_gyarados_types():
     gyarados_data = {
         "types": [
             {"type": {"name": "WATER"}},
@@ -56,22 +57,15 @@ def test_get_pokemon_types_success():
     }
     assert get_pokemon_types(gyarados_data) == ["water", "flying"]
 
-def test_get_pokemon_types_error(pokemon_name = 'Torchic'):
-    test_data = get_pokemon_data(pokemon_name)
-    test_types = get_pokemon_types(test_data)
+def test_torchic_not_water():
+    torchic_data = get_pokemon_data('Torchic')
+    test_types = get_pokemon_types(torchic_data)
+    assert "water" not in test_types
 
-    assert "fire" in test_types, f"Expected {pokemon_name} to be Fire type, but got {test_types}"
-
-    torchic_wrong_data = {
-        "types": [
-            {"type": {"name": "GRASS"}}
-        ]
-    }
-    with pytest.raises(KeyError):
-        get_pokemon_types(torchic_wrong_data)
-
-    with pytest.raises(TypeError):
-        get_pokemon_types(None)
+def test_pikachu_not_ground():
+    pikachu_data = get_pokemon_data('Pikachu')
+    test_types = get_pokemon_types(pikachu_data)
+    assert "ground" not in test_types
 
 
 

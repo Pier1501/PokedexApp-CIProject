@@ -23,7 +23,11 @@ def get_pokemon_data(pokemon_name):
         return f"Error: {str(e)}"
 
 def get_pokemon_types(pokemon_data):
-    return [type_info["type"]["name"].lower() for type_info in pokemon_data["types"]]
+    if isinstance(pokemon_data, dict) and "types" in pokemon_data:
+        if isinstance(pokemon_data["types"], list):
+            return pokemon_data["types"] 
+        return [type_info["type"]["name"].lower() for type_info in pokemon_data["types"]]
+    return []
 
 def calculate_type_effectiveness(pokemon_types, type_chart):
     effectiveness = {
@@ -40,7 +44,7 @@ def print_effectiveness_table(pokemon_name, effectiveness):
     print(f"\nDefensive Type Chart for {pokemon_name}:")
     print("-" * 40)
 
-    immune = []
+    immune = []<
     quarter = []
     half = []
     neutral = []

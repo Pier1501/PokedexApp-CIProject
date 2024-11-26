@@ -25,7 +25,7 @@ schema_pokemon_data = {
     "required": ["name", "id", "height", "weight", "types", "abilities"]
 }
 
-
+# Testing json schema of the pokemon
 def validate_wrapper(schema, pokemon_name):
     instance = get_pokemon_data(pokemon_name)
     try:
@@ -34,7 +34,8 @@ def validate_wrapper(schema, pokemon_name):
     except Exception as e:
         print(f"Schema validation error: {e}")
         return False
-    
+
+# Testing pokemon types
 def test_charizard_types():
     charizard_data = {
         "types": ["fire", "flying"] 
@@ -46,7 +47,8 @@ def test_tyranitar_types():
         "types": ["rock", "dark"] 
     }
     assert get_pokemon_types(tyranitar_data) == ["rock", "dark"]
-    
+
+
 def test_torchic_not_water():
     torchic_data = get_pokemon_data('torchic')
     types = torchic_data["types"]
@@ -57,4 +59,22 @@ def test_pikachu_not_ground():
     types = pikachu_data["types"]
     assert "ground" not in types, f"Expected Pikachu to not be Ground type, but got {types}"
 
+# Testing pokemon weaknesses table
+def test_charizard_effectiveness():
+    with open("types.json", "r") as f:
+        type_chart = json.load(f)
+   
+    effectiveness = calculate_type_effectiveness(["fire", "flying"], type_chart)
+    assert effectiveness["water"] == 2.0, "Charizard should be weak to water"
+    assert effectiveness["rock"] == 4.0, "Charizard should be very weak to rock"
+    assert effectiveness["ground"] == 0.0, "Charizard should be immune to ground"
 
+
+def test_scizor_effectiveness():
+    with open("types.json", "r") as f:
+        type_chart = json.load(f)
+   
+    effectiveness = calculate_type_effectiveness(["bug", "iron"], type_chart)
+    assert effectiveness["fire"] == 4.0, "Scizor should be very weak to fire"
+    assert effectiveness["ground"] == 2.0, "Scizor should be weak to ground"
+    assert effectiveness["rock"] == 2.0, "Scizor should be weak to rock"

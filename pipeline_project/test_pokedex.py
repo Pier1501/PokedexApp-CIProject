@@ -78,3 +78,81 @@ def test_scizor_effectiveness():
     assert effectiveness["fire"] == 4.0, "Scizor should be very weak to fire"
     assert effectiveness["ground"] == 2.0, "Scizor should be weak to ground"
     assert effectiveness["rock"] == 2.0, "Scizor should be weak to rock"
+
+
+#  Schema for validating types weaknesses file
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pokemon Type Chart Schema",
+  "description": "Schema for validating Pokemon type effectiveness relationships",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "normal", "fire", "water", "electric", "grass", "ice",
+    "fighting", "poison", "ground", "flying", "psychic",
+    "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"
+  ],
+  "propertyNames": {
+    "enum": [
+      "normal", "fire", "water", "electric", "grass", "ice",
+      "fighting", "poison", "ground", "flying", "psychic",
+      "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"
+    ]
+  },
+  "properties": {
+    "normal": { "$ref": "#/$defs/typeEffectiveness" },
+    "fire": { "$ref": "#/$defs/typeEffectiveness" },
+    "water": { "$ref": "#/$defs/typeEffectiveness" },
+    "electric": { "$ref": "#/$defs/typeEffectiveness" },
+    "grass": { "$ref": "#/$defs/typeEffectiveness" },
+    "ice": { "$ref": "#/$defs/typeEffectiveness" },
+    "fighting": { "$ref": "#/$defs/typeEffectiveness" },
+    "poison": { "$ref": "#/$defs/typeEffectiveness" },
+    "ground": { "$ref": "#/$defs/typeEffectiveness" },
+    "flying": { "$ref": "#/$defs/typeEffectiveness" },
+    "psychic": { "$ref": "#/$defs/typeEffectiveness" },
+    "bug": { "$ref": "#/$defs/typeEffectiveness" },
+    "rock": { "$ref": "#/$defs/typeEffectiveness" },
+    "ghost": { "$ref": "#/$defs/typeEffectiveness" },
+    "dragon": { "$ref": "#/$defs/typeEffectiveness" },
+    "dark": { "$ref": "#/$defs/typeEffectiveness" },
+    "steel": { "$ref": "#/$defs/typeEffectiveness" },
+    "fairy": { "$ref": "#/$defs/typeEffectiveness" }
+  },
+  "$defs": {
+    "typeEffectiveness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "normal", "fire", "water", "electric", "grass", "ice",
+        "fighting", "poison", "ground", "flying", "psychic",
+        "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"
+      ],
+      "properties": {
+        "normal": { "$ref": "#/$defs/multiplier" },
+        "fire": { "$ref": "#/$defs/multiplier" },
+        "water": { "$ref": "#/$defs/multiplier" },
+        "electric": { "$ref": "#/$defs/multiplier" },
+        "grass": { "$ref": "#/$defs/multiplier" },
+        "ice": { "$ref": "#/$defs/multiplier" },
+        "fighting": { "$ref": "#/$defs/multiplier" },
+        "poison": { "$ref": "#/$defs/multiplier" },
+        "ground": { "$ref": "#/$defs/multiplier" },
+        "flying": { "$ref": "#/$defs/multiplier" },
+        "psychic": { "$ref": "#/$defs/multiplier" },
+        "bug": { "$ref": "#/$defs/multiplier" },
+        "rock": { "$ref": "#/$defs/multiplier" },
+        "ghost": { "$ref": "#/$defs/multiplier" },
+        "dragon": { "$ref": "#/$defs/multiplier" },
+        "dark": { "$ref": "#/$defs/multiplier" },
+        "steel": { "$ref": "#/$defs/multiplier" },
+        "fairy": { "$ref": "#/$defs/multiplier" }
+      }
+    },
+    "multiplier": {
+      "type": "number",
+      "enum": [0, 0.5, 1, 2],
+      "description": "Damage multiplier for type effectiveness (0 = immune, 0.5 = not very effective, 1 = normal, 2 = super effective)"
+    }
+  }
+}

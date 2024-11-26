@@ -61,7 +61,7 @@ def test_pikachu_not_ground():
 
 # Testing pokemon weaknesses table
 def test_charizard_effectiveness():
-    with open("/workspaces/2023-25.BD.UFS14/pipeline_project/types.json", "r") as f:
+    with open("types.json", "r") as f:
         type_chart = json.load(f)
    
     effectiveness = calculate_type_effectiveness(["fire", "flying"], type_chart)
@@ -71,7 +71,7 @@ def test_charizard_effectiveness():
 
 
 def test_scizor_effectiveness():
-    with open("/workspaces/2023-25.BD.UFS14/pipeline_project/types.json", "r") as f:
+    with open("types.json", "r") as f:
         type_chart = json.load(f)
    
     effectiveness = calculate_type_effectiveness(["bug", "iron"], type_chart)

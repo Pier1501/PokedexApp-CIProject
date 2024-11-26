@@ -23,6 +23,15 @@ def get_pokemon_data(pokemon_name):
         return f"Error: {str(e)}"
 
 def get_pokemon_types(pokemon_data):
+    if pokemon_data is None:
+        raise TypeError("Pokemon data cannot be None")
+    
+    if isinstance(pokemon_data, str):
+        raise TypeError("Pokemon data must be a dictionary, not a string")
+    
+    if 'types' not in pokemon_data:
+        raise KeyError("Pokemon data must contain a 'types' key")
+    
     return [type_info["type"]["name"].lower() for type_info in pokemon_data["types"]]
 
 def calculate_type_effectiveness(pokemon_types, type_chart):

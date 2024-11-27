@@ -78,9 +78,9 @@ def print_effectiveness_table(pokemon_name, effectiveness):
 
 def main():
     try:
-        type_chart = json.load("types.json")
+        type_chart = json.load("typing.json")
     except FileNotFoundError:
-        print("Error: types.json not found in current directory")
+        print("Error: typing.json not found in current directory")
         return
     
     pokemon_name = input("Enter the name of a Pokemon: ").lower()

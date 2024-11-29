@@ -78,11 +78,9 @@ def test_scizor_effectiveness():
     assert effectiveness["rock"] == 2.0, "Scizor should be weak to rock"
 
 
-#  Schema for validating types weaknesses file
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Pokemon Type Chart Schema",
-  "description": "Schema for validating Pokemon type effectiveness relationships",
+#  Schema for validating types weaknesses file (JSON SCHEMA VALIDATION NOT IMPLEMENTED)
+'''
+typing_file_json_schema = {
   "type": "object",
   "additionalProperties": False,
   "required": [
@@ -154,6 +152,7 @@ def test_scizor_effectiveness():
     }
   }
 }
+'''
 
 # Snapshot testing
 

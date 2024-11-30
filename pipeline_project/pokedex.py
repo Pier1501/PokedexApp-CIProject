@@ -4,7 +4,7 @@ import os
 
 current_directory = os.getcwd()
 
-typing_json_path = os.path.join(current_directory, "typing.json")
+typing_json_path = os.path.join(current_directory, "pipeline_project\\typing.json")
 
 url_pokeapi = "https://pokeapi.co/api/v2/pokemon/"
 

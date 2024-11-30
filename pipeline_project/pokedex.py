@@ -1,5 +1,10 @@
 import requests as rq
 import json
+import os
+
+current_directory = os.getcwd()
+
+typing_json_path = os.path.join(current_directory, "typing.json")
 
 url_pokeapi = "https://pokeapi.co/api/v2/pokemon/"
 
@@ -78,10 +83,10 @@ def print_effectiveness_table(pokemon_name, effectiveness):
 
 def main():
     try:
-        with open("typing.json", "r") as typing_file:
+        with open(typing_json_path, "r") as typing_file:
             type_chart = json.load(typing_file)     
     except FileNotFoundError:
-        print("Error: typing.json not found in current directory")
+        print("Error: typing.json could not be found!")
         return
     
     pokemon_name = input("Enter the name of a Pokemon: ").lower()

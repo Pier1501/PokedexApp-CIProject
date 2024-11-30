@@ -1,6 +1,9 @@
 from jsonschema import validate
 import json
 import pytest
+import os
+
+typing_json_path = os.path.join(os.getcwd(), "typing.json")
 
 from pokedex import get_pokemon_data, get_pokemon_types
 from pokedex import calculate_type_effectiveness
@@ -61,7 +64,8 @@ def test_pikachu_not_ground():
 
 # Testing pokemon weaknesses table
 def test_charizard_effectiveness():
-    type_chart = json.load(open("typing.json"))
+    with open(typing_json_path, 'r') as typing_file:
+        type_chart = json.load(typing_file)
    
     effectiveness = calculate_type_effectiveness(["fire", "flying"], type_chart)
     assert effectiveness["water"] == 2.0, "Charizard should be weak to water"
@@ -70,7 +74,8 @@ def test_charizard_effectiveness():
 
 
 def test_scizor_effectiveness():
-    type_chart = json.load(open("typing.json"))
+    with open(typing_json_path, 'r') as typing_file:
+        type_chart = json.load(typing_file)
    
     effectiveness = calculate_type_effectiveness(["bug", "iron"], type_chart)
     assert effectiveness["fire"] == 4.0, "Scizor should be very weak to fire"
@@ -186,7 +191,8 @@ def test_effectiveness_table_with_snapshot(snapshot_2):
         }
     ]
 
-    type_chart = json.load(open("typing.json"))
+    with open(typing_json_path, 'r') as typing_file:
+        type_chart = json.load(typing_file)
    
     results = {}
     for case in test_cases:
@@ -222,4 +228,4 @@ def test_effectiveness_table_with_snapshot(snapshot_2):
        
         results[case["pokemon"]] = categorized
    
-    snapshot.assert_match(results)
+    snapshot_2.assert_match(results)

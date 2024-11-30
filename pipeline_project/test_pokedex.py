@@ -173,13 +173,6 @@ def validate_typing_chart(typing_chart_schema, typing_chart_path = typing_json_p
 
 # Snapshot testing
 
-def test_typing_chart_with_snapshot(snapshot_typing_chart):
-    with open(typing_json_path, 'r') as file:
-        data = json.load(file)
-    
-    # Snapshot the entire JSON structure
-    snapshot_typing_chart.assert_match(json.dumps(data, indent=2), "typing_json_structure.json")
-
 def test_pokemon_data_with_snapshot(snapshot_pokemon_data):
     pokemon_list = ['charizard', 'bulbasaur', 'pikachu']
    

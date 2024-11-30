@@ -176,7 +176,7 @@ def validate_typing_chart(typing_chart_schema, typing_chart_path = typing_json_p
 def test_pokemon_data_with_snapshot(snapshot):
     snapshot.snapshot_dir = 'pipeline_project/snapshots'
 
-    snapshot.assert_match(get_pokemon_data('charizard'), "pokemon_data_snapshot.txt")
+    snapshot.assert_match(get_pokemon_data('charizard'), "pokemon_data_snapshot.json")
 
 '''
 def test_effectiveness_table_with_snapshot(snapshot):

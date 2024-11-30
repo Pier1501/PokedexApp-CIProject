@@ -6,7 +6,7 @@ from pokedex import get_pokemon_data, get_pokemon_types
 from pokedex import calculate_type_effectiveness
 
 current_directory = os.getcwd()
-typing_json_path = os.path.join(current_directory, "pipeline_project/typing.json")
+typing_json_path = os.path.join(current_directory, "typing.json")
 
 
 # Schema for validating Pokemon data

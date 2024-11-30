@@ -1,0 +1,1 @@
+{'pokemon': 'Gengar', 'types': ['ghost', 'poison'], 'effectiveness': {'immune': ['normal', 'fighting'], 'quarter': ['poison', 'bug'], 'half': ['grass', 'fairy'], 'neutral': ['fire', 'water', 'electric', 'ice', 'flying', 'rock', 'dragon', 'steel'], 'double': ['ground', 'ghost', 'dark'], 'quadruple': ['psychic']}}

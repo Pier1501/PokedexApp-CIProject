@@ -174,71 +174,54 @@ def validate_typing_chart(typing_chart_schema, typing_chart_path = typing_json_p
 # Snapshot testing
 
 def test_pokemon_data_with_snapshot(snapshot):
-    snapshot.snapshot_dir = 'pipeline_project/snapshots'
+    snapshot.snapshot_dir = 'snapshots'
 
     charizard_result = get_pokemon_data('charizard')
 
     snapshot.assert_match(str(charizard_result), "pokemon_data_snapshot.txt")
 
-'''
+
 def test_effectiveness_table_with_snapshot(snapshot):
-    snapshot.snapshot_dir = 'pipeline_project/snapshots'
+    snapshot.snapshot_dir = 'snapshots'
 
-    test_cases = [
-        {
-            "pokemon": "Charizard",
-            "types": ["fire", "flying"]
-        },
-        {
-            "pokemon": "Bulbasaur",
-            "types": ["grass", "poison"]
-        },
-        {
-            "pokemon": "Gengar",
-            "types": ["ghost", "poison"]
-        },
-        {
-            "pokemon": "Tyranitar",
-            "types": ["rock", "dark"]
-        }
-    ]
+    gengar_data = get_pokemon_data("gengar")
 
-    with open(typing_json_path, 'r') as typing_file:
+    gengar_info = {k: gengar_data[k] for k in ["name", "types"]}
+
+    with open(typing_json_path, "r") as typing_file:
         type_chart = json.load(typing_file)
-   
-    results = {}
-    for case in test_cases:
-        effectiveness = calculate_type_effectiveness(case["types"], type_chart)
+
+
+    effectiveness = calculate_type_effectiveness(gengar_info["types"], type_chart)
        
         # Format results in a readable way
-        categorized = {
-            "pokemon": case["pokemon"],
-            "types": case["types"],
-            "effectiveness": {
-                "immune": [],
-                "quarter": [],
-                "half": [],
-                "neutral": [],
-                "double": [],
-                "quadruple": []
-            }
+    categorized = {
+        "pokemon": gengar_info["name"],
+        "types": gengar_info["types"],
+        "effectiveness": {
+            "immune": [],
+            "quarter": [],
+            "half": [],
+            "neutral": [],
+            "double": [],
+            "quadruple": []
         }
+    }
        
-        for type_name, multiplier in effectiveness.items():
-            if multiplier == 0:
-                categorized["effectiveness"]["immune"].append(type_name)
-            elif multiplier == 0.25:
-                categorized["effectiveness"]["quarter"].append(type_name)
-            elif multiplier == 0.5:
-                categorized["effectiveness"]["half"].append(type_name)
-            elif multiplier == 1:
-                categorized["effectiveness"]["neutral"].append(type_name)
-            elif multiplier == 2:
-                categorized["effectiveness"]["double"].append(type_name)
-            elif multiplier == 4:
-                categorized["effectiveness"]["quadruple"].append(type_name)
-       
-        results[case["pokemon"]] = categorized
-   
+    for type_name, multiplier in effectiveness.items():
+        if multiplier == 0:
+            categorized["effectiveness"]["immune"].append(type_name)
+        elif multiplier == 0.25:
+            categorized["effectiveness"]["quarter"].append(type_name)
+        elif multiplier == 0.5:
+            categorized["effectiveness"]["half"].append(type_name)
+        elif multiplier == 1:
+            categorized["effectiveness"]["neutral"].append(type_name)
+        elif multiplier == 2:
+            categorized["effectiveness"]["double"].append(type_name)
+        elif multiplier == 4:
+            categorized["effectiveness"]["quadruple"].append(type_name)
+    
+    results = str(categorized)
+
     snapshot.assert_match(results, "effectiveness_table_snapshot.txt")
-'''

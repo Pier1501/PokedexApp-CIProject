@@ -1,0 +1,1 @@
+{'name': 'Charizard', 'id': 6, 'height': 1.7, 'weight': 90.5, 'types': ['fire', 'flying'], 'abilities': ['blaze', 'solar-power']}

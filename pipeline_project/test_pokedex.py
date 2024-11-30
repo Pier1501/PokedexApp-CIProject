@@ -80,7 +80,7 @@ def test_scizor_effectiveness():
     with open(typing_json_path, 'r') as typing_file:
         type_chart = json.load(typing_file)
    
-    effectiveness = calculate_type_effectiveness(["bug", "iron"], type_chart)
+    effectiveness = calculate_type_effectiveness(["bug", "steel"], type_chart)
     assert effectiveness["fire"] == 4.0, "Scizor should be very weak to fire"
     assert effectiveness["ground"] == 2.0, "Scizor should be weak to ground"
     assert effectiveness["rock"] == 2.0, "Scizor should be weak to rock"

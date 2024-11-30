@@ -5,6 +5,7 @@ import os
 from pokedex import get_pokemon_data, get_pokemon_types
 from pokedex import calculate_type_effectiveness
 
+# Get the path for the typing chart file, saved as a JSON
 current_directory = os.getcwd()
 typing_json_path = os.path.join(current_directory, "typing.json")
 
@@ -30,7 +31,6 @@ schema_pokemon_data = {
 }
 
 
-
 # Testing json schema of the pokemon
 def validate_wrapper(schema, pokemon_name):
     instance = get_pokemon_data(pokemon_name)
@@ -41,7 +41,7 @@ def validate_wrapper(schema, pokemon_name):
         print(f"Schema validation error: {e}")
         return False
 
-# Testing pokemon types
+# Testing function to see if pokemon types are correct
 def test_charizard_types():
     charizard_data = {
         "types": ["fire", "flying"] 
@@ -65,6 +65,7 @@ def test_pikachu_not_ground():
     types = pikachu_data["types"]
     assert "ground" not in types, f"Expected Pikachu to not be Ground type, but got {types}"
 
+
 # Testing pokemon weaknesses table
 def test_charizard_effectiveness():
     with open(typing_json_path, 'r') as typing_file:
@@ -86,7 +87,7 @@ def test_scizor_effectiveness():
     assert effectiveness["grass"] == 0.25, "Scizor should be weak to rock"
 
 
-#  Schema for validating types weaknesses file (JSON SCHEMA VALIDATION NOT IMPLEMENTED)
+#  Schema for validating types weaknesses file
 typing_chart_schema = {
   "type": "object",
   "additionalProperties": False,
@@ -160,6 +161,7 @@ typing_chart_schema = {
   }
 }
 
+# Validating typing.json file
 def validate_typing_chart(typing_chart_schema, typing_chart_path = typing_json_path):
     with open(typing_chart_path, 'r') as typing_file:
         typing_chart_instance = json.load(typing_file)
@@ -172,7 +174,6 @@ def validate_typing_chart(typing_chart_schema, typing_chart_path = typing_json_p
 
 
 # Snapshot testing
-
 def test_pokemon_data_with_snapshot(snapshot):
     snapshot.snapshot_dir = 'snapshots'
 

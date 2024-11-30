@@ -87,8 +87,7 @@ def test_scizor_effectiveness():
 
 
 #  Schema for validating types weaknesses file (JSON SCHEMA VALIDATION NOT IMPLEMENTED)
-'''
-typing_file_json_schema = {
+typing_chart_schema = {
   "type": "object",
   "additionalProperties": False,
   "required": [
@@ -160,21 +159,38 @@ typing_file_json_schema = {
     }
   }
 }
-'''
+
+def validate_typing_chart(typing_chart_schema, typing_chart_path = typing_json_path):
+    with open(typing_chart_path, 'r') as typing_file:
+        typing_chart_instance = json.load(typing_file)
+    try:
+        validate(instance = typing_chart_instance, schema = typing_chart_schema)
+        return True
+    except Exception as e:
+        print(f"Schema validation error: {e}")
+        return False
+
 
 # Snapshot testing
 
-def test_pokemon_data_with_snapshot(snapshot_1):
+def test_typing_chart_with_snapshot(snapshot_typing_chart):
+    with open(typing_json_path, 'r') as file:
+        data = json.load(file)
+    
+    # Snapshot the entire JSON structure
+    snapshot_typing_chart.assert_match(json.dumps(data, indent=2), "typing_json_structure.json")
+
+def test_pokemon_data_with_snapshot(snapshot_pokemon_data):
     pokemon_list = ['charizard', 'bulbasaur', 'pikachu']
    
     results = {}
     for pokemon in pokemon_list:
         results[pokemon] = get_pokemon_data(pokemon)
 
-    snapshot_1.assert_match(results)
+    snapshot_pokemon_data.assert_match(results)
 
 
-def test_effectiveness_table_with_snapshot(snapshot_2):
+def test_effectiveness_table_with_snapshot(snapshot_effectiveness_table):
     test_cases = [
         {
             "pokemon": "Charizard",
@@ -231,4 +247,4 @@ def test_effectiveness_table_with_snapshot(snapshot_2):
        
         results[case["pokemon"]] = categorized
    
-    snapshot_2.assert_match(results)
+    snapshot_effectiveness_table.assert_match(results)

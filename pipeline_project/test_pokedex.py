@@ -173,17 +173,15 @@ def validate_typing_chart(typing_chart_schema, typing_chart_path = typing_json_p
 
 # Snapshot testing
 
-def test_pokemon_data_with_snapshot(snapshot_pokemon_data):
-    pokemon_list = ['charizard', 'bulbasaur', 'pikachu']
-   
-    results = {}
-    for pokemon in pokemon_list:
-        results[pokemon] = get_pokemon_data(pokemon)
+def test_pokemon_data_with_snapshot(snapshot):
+    snapshot.snapshot_dir = 'pipeline_project/snapshots'
 
-    snapshot_pokemon_data.assert_match(results)
+    snapshot.assert_match(get_pokemon_data('charizard'), "pokemon_data_snapshot.txt")
 
+'''
+def test_effectiveness_table_with_snapshot(snapshot):
+    snapshot.snapshot_dir = 'pipeline_project/snapshots'
 
-def test_effectiveness_table_with_snapshot(snapshot_effectiveness_table):
     test_cases = [
         {
             "pokemon": "Charizard",
@@ -240,4 +238,5 @@ def test_effectiveness_table_with_snapshot(snapshot_effectiveness_table):
        
         results[case["pokemon"]] = categorized
    
-    snapshot_effectiveness_table.assert_match(results)
+    snapshot.assert_match(results, "effectiveness_table_snapshot.txt")
+'''

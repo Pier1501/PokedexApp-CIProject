@@ -191,10 +191,8 @@ def test_effectiveness_table_with_snapshot(snapshot):
     with open(typing_json_path, "r") as typing_file:
         type_chart = json.load(typing_file)
 
-
     effectiveness = calculate_type_effectiveness(gengar_info["types"], type_chart)
        
-        # Format results in a readable way
     categorized = {
         "pokemon": gengar_info["name"],
         "types": gengar_info["types"],

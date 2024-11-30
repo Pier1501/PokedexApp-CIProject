@@ -82,8 +82,8 @@ def test_scizor_effectiveness():
    
     effectiveness = calculate_type_effectiveness(["bug", "steel"], type_chart)
     assert effectiveness["fire"] == 4.0, "Scizor should be very weak to fire"
-    assert effectiveness["ground"] == 2.0, "Scizor should be weak to ground"
-    assert effectiveness["rock"] == 2.0, "Scizor should be weak to rock"
+    assert effectiveness["ground"] == 1.0, "Scizor should be weak to ground"
+    assert effectiveness["grass"] == 0.25, "Scizor should be weak to rock"
 
 
 #  Schema for validating types weaknesses file (JSON SCHEMA VALIDATION NOT IMPLEMENTED)

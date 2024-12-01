@@ -1,7 +1,6 @@
 import azure.functions as func
 import json
 import logging
-import os 
 import requests as rq
 
 

@@ -4,9 +4,6 @@ import logging
 import os 
 import requests as rq
 
-current_directory = os.getcwd()
-
-typing_json_path = os.path.join(current_directory, "/typing.json")
 
 app = func.FunctionApp()
 
@@ -48,7 +45,7 @@ def Pokedex(req: func.HttpRequest) -> func.HttpResponse:
         pokemon_name = req.params.get('pokemon')
         
         # Load type chart from the included json file
-        with open(typing_json_path, 'r') as f:
+        with open('typing.json', 'r') as f:
             type_chart = json.load(f)
 
         if not pokemon_name:

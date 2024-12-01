@@ -16,7 +16,9 @@
 			"extensions": [
 				"ms-python.python",
 				"ms-toolsai.jupyter",
-				"eamodio.gitlens"
+				"eamodio.gitlens",
+				"github.vscode-github-actions",
+				"ms-azuretools.vscode-azurefunctions"
 			]
 		}
 	}

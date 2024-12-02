@@ -35,7 +35,7 @@ def calculate_type_effectiveness(pokemon_types, type_chart):
     
     return effectiveness
 
-@app.route(route="Pokedex", auth_level=func.AuthLevel.anonymous)
+@app.route(route="Pokedex", auth_level=func.AuthLevel.ANONYMOUS)
 def Pokedex(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 

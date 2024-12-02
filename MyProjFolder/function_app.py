@@ -35,15 +35,13 @@ def calculate_type_effectiveness(pokemon_types, type_chart):
     
     return effectiveness
 
-@app.route(route="Pokedex", auth_level=func.AuthLevel.ANONYMOUS)
+@app.route(route="Pokedex", auth_level=func.AuthLevel.anonymous)
 def Pokedex(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     try:
-        # Get the pokemon name from query parameter
         pokemon_name = req.params.get('pokemon')
         
-        # Load type chart from the included json file
         with open('typing.json', 'r') as f:
             type_chart = json.load(f)
 
@@ -54,7 +52,6 @@ def Pokedex(req: func.HttpRequest) -> func.HttpResponse:
                 status_code=400
             )
 
-        # Get Pokemon data from PokeAPI
         pokemon_data = get_pokemon_data(pokemon_name)
         
         if not pokemon_data:
@@ -63,11 +60,10 @@ def Pokedex(req: func.HttpRequest) -> func.HttpResponse:
                 mimetype="application/json",
                 status_code=404
             )
-
-        # Calculate type effectiveness
+        
         effectiveness = calculate_type_effectiveness(pokemon_data["types"], type_chart)
         
-        # Organize effectiveness data
+
         effectiveness_categories = {
             "immune": [],
             "quarter": [],
@@ -91,7 +87,7 @@ def Pokedex(req: func.HttpRequest) -> func.HttpResponse:
             elif multiplier == 4:
                 effectiveness_categories["quadruple"].append(type_name)
 
-        # Prepare response
+
         response_data = {
             "pokemon_info": pokemon_data,
             "type_effectiveness": effectiveness_categories

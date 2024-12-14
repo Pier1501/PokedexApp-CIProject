@@ -1,4 +1,4 @@
-# 2023-25.BD.UFS14
+# Pokedex App -  CI Project
 
 This is a CI project for my Software Development course at ITS Angelo Rizzoli.
 

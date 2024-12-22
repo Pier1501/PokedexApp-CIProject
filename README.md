@@ -1,5 +1,7 @@
 # Pokedex App -  CI Project
 
+![PipelineProjectTests](https://github.com/Pier1501/2023-25.BD.UFS14/actions/workflows/pipeline-test.yml/badge.svg)
+
 This is a CI project for my Software Development course at ITS Angelo Rizzoli.
 
 Prerequisite:
@@ -12,5 +14,3 @@ Goals:
 - Json Schemas for the structure of the data requested
 - Snapshot Testing to make sure data is not modified and works
 - Create an Azure Function for the Pokedex App
-
-![PipelineProjectTests](https://github.com/Pier1501/2023-25.BD.UFS14/actions/workflows/pipeline-test.yml/badge.svg)

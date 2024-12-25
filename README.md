@@ -5,7 +5,9 @@
 This is a CI project for my Software Development course at ITS Angelo Rizzoli.
 
 Prerequisite:
-- Python Knowledge
+- Python Programming
+
+Project:
 - Created a program that uses the PokeAPI to return information about Pokemon, similar to a Pokedex
 
 Goals:

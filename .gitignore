@@ -162,3 +162,10 @@ cython_debug/
 #.idea/
 
 .python_packages
+
+
+# More files
+
+test_funny.py
+function_app.py
+cartella_progetti/
